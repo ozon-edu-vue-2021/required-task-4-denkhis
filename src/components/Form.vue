@@ -3,7 +3,10 @@
     <div class="form">
       <form action="">
         <personal-data v-model="personalData" />
-        <passport-data />
+        <passport-data v-model="passportData" />
+        <el-button type="primary" @click.native="handleSubmit">
+          Отправить
+        </el-button>
       </form>
     </div>
   </el-container>
@@ -35,7 +38,7 @@ export default {
         gender: "",
       },
       passportData: {
-        citizenship: "",
+        citizenship: null,
         passportSeries: "",
         passportNumber: "",
         issueDate: "",
@@ -48,6 +51,11 @@ export default {
         previousLastName: "",
       },
     };
+  },
+  methods: {
+    handleSubmit() {
+      console.log(this.personalData, this.passportData);
+    },
   },
 };
 </script>

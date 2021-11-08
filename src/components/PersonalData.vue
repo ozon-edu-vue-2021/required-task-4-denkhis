@@ -13,11 +13,11 @@
       <el-input v-model="value.lastName" placeholder="Отчество" />
     </el-col>
     <el-col :span="24">
-      <!-- <el-date-picker
-        v-model="value1"
+      <el-date-picker
+        v-model="value.birthDate"
         type="date"
         placeholder="Дата рождения"
-      /> -->
+      />
     </el-col>
     <el-col :span="12">
       <el-input v-model="value.email" placeholder="Email" />
