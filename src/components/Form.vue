@@ -1,5 +1,9 @@
 <template>
-  <div class="form"></div>
+  <el-container>
+    <div class="form">
+      <h1>header</h1>
+    </div>
+  </el-container>
 </template>
 
 <script>
