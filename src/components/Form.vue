@@ -2,7 +2,7 @@
   <el-container>
     <div class="form">
       <form action="">
-        <personal-data />
+        <personal-data v-model="personalData" />
         <passport-data />
       </form>
     </div>
@@ -16,6 +16,13 @@ export default {
   components: {
     PersonalData,
     PassportData,
+  },
+  watch: {
+    "personalData.lastName": {
+      handler(nV) {
+        console.log(nV);
+      },
+    },
   },
   data() {
     return {

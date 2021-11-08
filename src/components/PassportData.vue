@@ -4,7 +4,7 @@
       <h2>Паспортные данные</h2>
     </el-col>
     <el-col :span="20">
-      <el-select v-model="value" placeholder="Гражданство">
+      <!-- <el-select v-model="value" placeholder="Гражданство">
         <el-option
           v-for="item in citizenships"
           :key="item.id"
@@ -12,7 +12,7 @@
           :value="item.id"
         >
         </el-option>
-      </el-select>
+      </el-select> -->
     </el-col>
     <template v-if="true">
       <el-col :span="8">
@@ -22,11 +22,11 @@
         <el-input placeholder="Номер паспорта" />
       </el-col>
       <el-col :span="8">
-        <el-date-picker
+        <!-- <el-date-picker
           v-model="value1"
           type="date"
           placeholder="Дата выдачи"
-        />
+        /> -->
       </el-col>
     </template>
     <div v-else>456</div>
