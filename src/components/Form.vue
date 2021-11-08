@@ -26,9 +26,6 @@ export default {
         birthDate: "",
         email: "",
         gender: "",
-        isNameChanged: false,
-        newFirstName: "",
-        newLastName: "",
       },
       passportData: {
         citizenship: "",
@@ -39,6 +36,9 @@ export default {
         passportType: "",
         firstNameLatin: "",
         secondNameLatin: "",
+        isNameChanged: false,
+        previousFirstName: "",
+        previousLastName: "",
       },
     };
   },
