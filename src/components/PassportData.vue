@@ -14,7 +14,7 @@
         </el-option>
       </el-select>
     </el-col>
-    <template v-if="value.citizenship === 8604">
+    <template v-if="value.citizenship === russianId">
       <el-col :span="8">
         <el-input placeholder="Серия паспорта" />
       </el-col>
@@ -39,12 +39,20 @@
 import citizenships from "../assets/data/citizenships.json";
 export default {
   props: {
-    value: Object,
+    value: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       citizenships,
     };
+  },
+  computed: {
+    russianId() {
+      return this.citizenships.find((item) => item.nationality === "Russia").id;
+    },
   },
 };
 </script>

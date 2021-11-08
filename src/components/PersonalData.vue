@@ -22,7 +22,7 @@
     <el-col :span="12">
       <el-input v-model="value.email" placeholder="Email" />
     </el-col>
-    <el-col class="mb20">
+    <el-col>
       <h4>Пол</h4>
       <el-radio-group v-model="value.gender">
         <el-radio label="male">Мужской</el-radio>
@@ -35,7 +35,10 @@
 <script>
 export default {
   props: {
-    value: Object,
+    value: {
+      type: Object,
+      required: true,
+    },
   },
 };
 </script>

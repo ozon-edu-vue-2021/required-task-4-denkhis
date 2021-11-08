@@ -20,13 +20,6 @@ export default {
     PersonalData,
     PassportData,
   },
-  watch: {
-    "personalData.lastName": {
-      handler(nV) {
-        console.log(nV);
-      },
-    },
-  },
   data() {
     return {
       personalData: {
@@ -59,3 +52,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.form {
+  max-width: 600px;
+}
+</style>
