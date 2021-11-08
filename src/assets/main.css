@@ -1,0 +1,19 @@
+.mb10 {
+  margin-bottom: 10px;
+} 
+
+.mb20 {
+  margin-bottom: 20px;
+} 
+
+.el-col {
+  margin-bottom: 20px;
+}
+
+.el-input__icon {
+  height: auto;
+}
+
+.form {
+  max-width: 600px;
+}

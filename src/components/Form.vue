@@ -1,21 +1,46 @@
 <template>
   <el-container>
     <div class="form">
-      <h1>header</h1>
+      <form action="">
+        <personal-data />
+        <passport-data />
+      </form>
     </div>
   </el-container>
 </template>
 
 <script>
+import PersonalData from "./PersonalData.vue";
+import PassportData from "./PassportData.vue";
 export default {
-  data() {
-    return {};
+  components: {
+    PersonalData,
+    PassportData,
   },
-  methods: {},
+  data() {
+    return {
+      personalData: {
+        firstName: "",
+        secondName: "",
+        lastName: "",
+        birthDate: "",
+        email: "",
+        gender: "",
+        isNameChanged: false,
+        newFirstName: "",
+        newLastName: "",
+      },
+      passportData: {
+        citizenship: "",
+        passportSeries: "",
+        passportNumber: "",
+        issueDate: "",
+        issueCountry: "",
+        passportType: "",
+        firstNameLatin: "",
+        secondNameLatin: "",
+      },
+    };
+  },
 };
 </script>
-
-<style scoped>
-.form {
-}
-</style>
