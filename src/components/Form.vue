@@ -39,7 +39,7 @@ export default {
         passportType: "",
         firstNameLatin: "",
         secondNameLatin: "",
-        isNameChanged: false,
+        isNameChanged: null,
         previousFirstName: "",
         previousLastName: "",
       },
