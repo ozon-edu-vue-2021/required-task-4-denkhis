@@ -7,10 +7,10 @@
     <el-col :span="12" class="select">
       <input
         v-model="searchString"
-        v-click-outside="hideDropdown"
-        placeholder="Гражданство"
+        :placeholder="value.citizenship || 'Гражданство'"
         class="input"
-        @focus="isDropdownOpen = true"
+        v-click-outside="hideDropdown"
+        @click="isDropdownOpen = true"
       />
       <div v-if="isDropdownOpen" class="select-dropdown">
         <ul v-if="citizenships.length">
@@ -116,7 +116,7 @@ import ClickOutside from "vue-click-outside";
 
 export default {
   // watch: {
-  //   searchString: {
+  //   "value.citizenship": {
   //     handler(nV) {
   //       console.log(nV);
   //     },
@@ -163,6 +163,7 @@ export default {
       this.isDropdownOpen = false;
     },
     selectCountry(citizenship) {
+      this.searchString = "";
       this.$emit("set-citizenship", citizenship);
     },
   },
