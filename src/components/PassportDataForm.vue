@@ -16,16 +16,29 @@
     </el-col> -->
 
     <el-col :span="12" class="select">
-      <el-input v-model="value.citizenship" placeholder="Гражданство" />
-      <div v-if="true" class="select-dropdown">
-        <ul>
-          <li v-for="index in 10" :key="index">item {{ index }}</li>
+      <input
+        :value="value.citizenship"
+        v-click-outside="hideDropdown"
+        placeholder="Гражданство"
+        class="input"
+        @focus="isDropdownOpen = true"
+      />
+      <div v-if="isDropdownOpen" class="select-dropdown">
+        <ul v-if="citizenships.length">
+          <li
+            v-for="item in citizenships"
+            :key="item.id"
+            @click="selectCountry(item.nationality)"
+          >
+            {{ item.nationality }}
+          </li>
         </ul>
+        <div v-else>Пусто</div>
       </div>
     </el-col>
 
     <template v-if="value.citizenship">
-      <template v-if="value.citizenship === russianId">
+      <template v-if="value.citizenship === russianNationality">
         <el-col :span="8">
           <el-input
             v-model="value.passportSeries"
@@ -110,8 +123,12 @@
 <script>
 import citizenships from "../assets/data/citizenships.json";
 import passportTypes from "../assets/data/passport-types.json";
+import ClickOutside from "vue-click-outside";
 
 export default {
+  directives: {
+    ClickOutside,
+  },
   props: {
     value: {
       type: Object,
@@ -120,49 +137,23 @@ export default {
   },
   data() {
     return {
+      isDropdownOpen: false,
       citizenships,
       passportTypes,
     };
   },
   computed: {
-    russianId() {
-      return this.citizenships.find((item) => item.nationality === "Russia").id;
+    russianNationality() {
+      return "Russia";
+    },
+  },
+  methods: {
+    hideDropdown() {
+      this.isDropdownOpen = false;
+    },
+    selectCountry(citizenship) {
+      this.$emit("set-citizenship", citizenship);
     },
   },
 };
 </script>
-
-<style scoped>
-.select {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.select-dropdown {
-  border-radius: 5px;
-  box-shadow: 1px 1px 5px grey;
-  background-color: white;
-  width: 100%;
-  position: absolute;
-  top: 50px;
-  z-index: 1;
-  cursor: pointer;
-}
-
-.select-dropdown ul {
-  padding: 0;
-}
-
-.select-dropdown li {
-  list-style: none;
-  padding-left: 10px;
-  border-radius: 5px;
-  user-select: none;
-}
-
-.select-dropdown li:hover {
-  background: lightskyblue;
-  list-style: none;
-}
-</style>

@@ -3,7 +3,10 @@
     <div class="form">
       <form action="">
         <personal-data-form v-model="personalData" />
-        <passport-data-form v-model="passportData" />
+        <passport-data-form
+          v-model="passportData"
+          @set-citizenship="setCitizenship"
+        />
         <el-button type="primary" @click.native="handleSubmit">
           Отправить
         </el-button>
@@ -43,6 +46,9 @@ export default {
     };
   },
   methods: {
+    setCitizenship(citizenship) {
+      this.passportData.citizenship = citizenship;
+    },
     handleSubmit() {
       console.log(
         omitBy(this.personalData, isNull),
