@@ -3,7 +3,7 @@
     <el-col>
       <h2>Паспортные данные</h2>
     </el-col>
-    <el-col :span="20">
+    <!-- <el-col :span="20">
       <el-select v-model="value.citizenship" placeholder="Гражданство">
         <el-option
           v-for="item in citizenships"
@@ -13,7 +13,17 @@
         >
         </el-option>
       </el-select>
+    </el-col> -->
+
+    <el-col :span="12" class="select">
+      <el-input v-model="value.citizenship" placeholder="Гражданство" />
+      <div v-if="true" class="select-dropdown">
+        <ul>
+          <li v-for="index in 10" :key="index">item {{ index }}</li>
+        </ul>
+      </div>
     </el-col>
+
     <template v-if="value.citizenship">
       <template v-if="value.citizenship === russianId">
         <el-col :span="8">
@@ -121,3 +131,38 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.select {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.select-dropdown {
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px grey;
+  background-color: white;
+  width: 100%;
+  position: absolute;
+  top: 50px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.select-dropdown ul {
+  padding: 0;
+}
+
+.select-dropdown li {
+  list-style: none;
+  padding-left: 10px;
+  border-radius: 5px;
+  user-select: none;
+}
+
+.select-dropdown li:hover {
+  background: lightskyblue;
+  list-style: none;
+}
+</style>
