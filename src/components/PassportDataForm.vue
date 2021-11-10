@@ -3,7 +3,6 @@
     <el-col>
       <h2>Паспортные данные</h2>
     </el-col>
-
     <el-col :span="12" class="select">
       <input
         v-model="searchString"
@@ -13,9 +12,9 @@
         @click="isDropdownOpen = true"
       />
       <div v-if="isDropdownOpen" class="select-dropdown">
-        <ul v-if="citizenships.length">
+        <ul v-if="allCitizenships.length">
           <li
-            v-for="item in filteredCitizenships"
+            v-for="item in allCitizenships"
             :key="item.id"
             @click="selectCountry(item.nationality)"
           >
@@ -25,7 +24,6 @@
         <div v-else>Пусто</div>
       </div>
     </el-col>
-
     <template v-if="value.citizenship">
       <template v-if="value.citizenship === russianNationality">
         <el-col :span="8">
@@ -70,7 +68,7 @@
         <el-col :span="8">
           <el-select v-model="value.issueCountry" placeholder="Страна выдачи">
             <el-option
-              v-for="item in citizenships"
+              v-for="item in allCitizenships"
               :key="item.id"
               :label="item.nationality"
               :value="item.id"
@@ -113,15 +111,14 @@
 import citizenships from "../assets/data/citizenships.json";
 import passportTypes from "../assets/data/passport-types.json";
 import ClickOutside from "vue-click-outside";
+import { debounce } from "../helpers/debounce";
 
 export default {
-  // watch: {
-  //   "value.citizenship": {
-  //     handler(nV) {
-  //       console.log(nV);
-  //     },
-  //   },
-  // },
+  watch: {
+    searchString(newValue) {
+      this.throttledSearchCitizenship(newValue);
+    },
+  },
   directives: {
     ClickOutside,
   },
@@ -135,27 +132,14 @@ export default {
     return {
       searchString: "",
       isDropdownOpen: false,
-      citizenships,
+      allCitizenships: null,
       passportTypes,
+      throttledSearchCitizenship: null,
     };
   },
   computed: {
     russianNationality() {
       return "Russia";
-    },
-    filteredCitizenships() {
-      return this.citizenships.filter((item) => {
-        return item.nationality
-          .toLowerCase()
-          .includes(this.searchString.toLowerCase());
-      });
-
-      // return this.allSkills.reduce((acc, curr) => {
-      //   if (!this.isSkillAlreadyExist(curr)) {
-      //     acc.push(curr);
-      //   }
-      //   return acc;
-      // }, []);
     },
   },
   methods: {
@@ -166,6 +150,16 @@ export default {
       this.searchString = "";
       this.$emit("set-citizenship", citizenship);
     },
+    getCitizenships(search) {
+      this.allCitizenships = citizenships;
+      this.allCitizenships = this.allCitizenships.filter((item) => {
+        return item.nationality.toLowerCase().includes(search.toLowerCase());
+      });
+    },
+  },
+  created() {
+    this.allCitizenships = citizenships;
+    this.throttledSearchCitizenship = debounce(this.getCitizenships, 300);
   },
 };
 </script>
