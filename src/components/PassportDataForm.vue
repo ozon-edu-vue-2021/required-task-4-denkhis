@@ -3,17 +3,6 @@
     <el-col>
       <h2>Паспортные данные</h2>
     </el-col>
-    <!-- <el-col :span="20">
-      <el-select v-model="value.citizenship" placeholder="Гражданство">
-        <el-option
-          v-for="item in citizenships"
-          :key="item.id"
-          :label="item.nationality"
-          :value="item.id"
-        >
-        </el-option>
-      </el-select>
-    </el-col> -->
 
     <el-col :span="12" class="select">
       <input
