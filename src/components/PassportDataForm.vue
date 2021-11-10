@@ -100,6 +100,7 @@
 <script>
 import citizenships from "../assets/data/citizenships.json";
 import passportTypes from "../assets/data/passport-types.json";
+
 export default {
   props: {
     value: {

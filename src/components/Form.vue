@@ -2,8 +2,8 @@
   <el-container>
     <div class="form">
       <form action="">
-        <personal-data v-model="personalData" />
-        <passport-data v-model="passportData" />
+        <personal-data-form v-model="personalData" />
+        <passport-data-form v-model="passportData" />
         <el-button type="primary" @click.native="handleSubmit">
           Отправить
         </el-button>
@@ -13,36 +13,28 @@
 </template>
 
 <script>
-import PersonalData from "./PersonalData.vue";
-import PassportData from "./PassportData.vue";
+import PersonalDataForm from "./PersonalDataForm.vue";
+import PassportDataForm from "./PassportDataForm.vue";
+import { personalData, passportData } from "../assets/data/data";
+
 export default {
   components: {
-    PersonalData,
-    PassportData,
+    PersonalDataForm,
+    PassportDataForm,
+  },
+  watch: {
+    "passportData.citizenship": {
+      handler() {
+        this.passportData.passportSeries = "";
+        this.passportData.passportNumber = "";
+        this.passportData.issueDate = "";
+      },
+    },
   },
   data() {
     return {
-      personalData: {
-        firstName: "",
-        secondName: "",
-        lastName: "",
-        birthDate: "",
-        email: "",
-        gender: "",
-      },
-      passportData: {
-        citizenship: null,
-        passportSeries: "",
-        passportNumber: "",
-        issueDate: "",
-        issueCountry: "",
-        passportType: "",
-        firstNameLatin: "",
-        secondNameLatin: "",
-        isNameChanged: null,
-        previousFirstName: "",
-        previousLastName: "",
-      },
+      personalData,
+      passportData,
     };
   },
   methods: {
