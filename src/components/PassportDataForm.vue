@@ -6,7 +6,7 @@
 
     <el-col :span="12" class="select">
       <input
-        :value="value.citizenship"
+        v-model="searchString"
         v-click-outside="hideDropdown"
         placeholder="Гражданство"
         class="input"
@@ -15,7 +15,7 @@
       <div v-if="isDropdownOpen" class="select-dropdown">
         <ul v-if="citizenships.length">
           <li
-            v-for="item in citizenships"
+            v-for="item in filteredCitizenships"
             :key="item.id"
             @click="selectCountry(item.nationality)"
           >
@@ -115,6 +115,13 @@ import passportTypes from "../assets/data/passport-types.json";
 import ClickOutside from "vue-click-outside";
 
 export default {
+  // watch: {
+  //   searchString: {
+  //     handler(nV) {
+  //       console.log(nV);
+  //     },
+  //   },
+  // },
   directives: {
     ClickOutside,
   },
@@ -126,6 +133,7 @@ export default {
   },
   data() {
     return {
+      searchString: "",
       isDropdownOpen: false,
       citizenships,
       passportTypes,
@@ -134,6 +142,20 @@ export default {
   computed: {
     russianNationality() {
       return "Russia";
+    },
+    filteredCitizenships() {
+      return this.citizenships.filter((item) => {
+        return item.nationality
+          .toLowerCase()
+          .includes(this.searchString.toLowerCase());
+      });
+
+      // return this.allSkills.reduce((acc, curr) => {
+      //   if (!this.isSkillAlreadyExist(curr)) {
+      //     acc.push(curr);
+      //   }
+      //   return acc;
+      // }, []);
     },
   },
   methods: {
