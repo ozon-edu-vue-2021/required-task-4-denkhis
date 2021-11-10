@@ -16,6 +16,7 @@
 import PersonalDataForm from "./PersonalDataForm.vue";
 import PassportDataForm from "./PassportDataForm.vue";
 import { personalData, passportData } from "../assets/data/data";
+import { omitBy, isNull } from "lodash";
 
 export default {
   components: {
@@ -25,9 +26,13 @@ export default {
   watch: {
     "passportData.citizenship": {
       handler() {
-        this.passportData.passportSeries = "";
-        this.passportData.passportNumber = "";
-        this.passportData.issueDate = "";
+        this.passportData.passportSeries = null;
+        this.passportData.passportNumber = null;
+        this.passportData.issueDate = null;
+        this.passportData.issueCountry = null;
+        this.passportData.passportType = null;
+        this.passportData.firstNameLatin = null;
+        this.passportData.secondNameLatin = null;
       },
     },
   },
@@ -39,7 +44,10 @@ export default {
   },
   methods: {
     handleSubmit() {
-      console.log(this.personalData, this.passportData);
+      console.log(
+        omitBy(this.personalData, isNull),
+        omitBy(this.passportData, isNull)
+      );
     },
   },
 };
