@@ -24,8 +24,8 @@
         <div v-else>Пусто</div>
       </div>
     </el-col>
-    <template v-if="value.citizenship">
-      <template v-if="value.citizenship === russianNationality">
+    <template v-if="citizenshipType">
+      <template v-if="citizenshipType === 1">
         <el-col :span="8">
           <el-input
             v-model="value.passportSeries"
@@ -127,6 +127,7 @@ export default {
       type: Object,
       required: true,
     },
+    citizenshipType: Number,
   },
   data() {
     return {
@@ -136,11 +137,6 @@ export default {
       passportTypes,
       throttledSearchCitizenship: null,
     };
-  },
-  computed: {
-    russianNationality() {
-      return "Russia";
-    },
   },
   methods: {
     hideDropdown() {

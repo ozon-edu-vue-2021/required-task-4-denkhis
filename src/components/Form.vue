@@ -5,6 +5,7 @@
         <personal-data-form v-model="personalData" />
         <passport-data-form
           v-model="passportData"
+          :citizenship-type="citizenshipType"
           @set-citizenship="setCitizenship"
         />
         <el-button type="primary" @click.native="handleSubmit">
@@ -28,14 +29,8 @@ export default {
   },
   watch: {
     "passportData.citizenship": {
-      handler() {
-        this.passportData.passportSeries = null;
-        this.passportData.passportNumber = null;
-        this.passportData.issueDate = null;
-        this.passportData.issueCountry = null;
-        this.passportData.passportType = null;
-        this.passportData.firstNameLatin = null;
-        this.passportData.secondNameLatin = null;
+      handler(newVal) {
+        this.citizenshipType = newVal === "Russia" ? 1 : 2;
       },
     },
     "passportData.isNameChanged": {
@@ -44,9 +39,19 @@ export default {
         this.passportData.previousLastName = null;
       },
     },
+    citizenshipType() {
+      this.passportData.passportSeries = null;
+      this.passportData.passportNumber = null;
+      this.passportData.issueDate = null;
+      this.passportData.issueCountry = null;
+      this.passportData.passportType = null;
+      this.passportData.firstNameLatin = null;
+      this.passportData.secondNameLatin = null;
+    },
   },
   data() {
     return {
+      citizenshipType: null,
       personalData,
       passportData,
     };
