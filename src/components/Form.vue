@@ -38,6 +38,12 @@ export default {
         this.passportData.secondNameLatin = null;
       },
     },
+    "passportData.isNameChanged": {
+      handler() {
+        this.passportData.previousFirstName = null;
+        this.passportData.previousLastName = null;
+      },
+    },
   },
   data() {
     return {
